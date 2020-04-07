@@ -1,35 +1,24 @@
 'use strict';
 
+let money=prompt("What is your monthly budget?"),
+    time=prompt("Please, enter date in YYYY-MM-DD format.");
+
+let appData = {
+    budget: money,
+    timeData: time,
+    expenses: {},
+    optionalExpenses: {},
+    income: [],
+    savings: false
+};
+
+console.log(money);
+console.log(time);
+
+let requiredCostName= prompt("Enter a required cost item this month"),
+    requiredCostValue= prompt("How much will it cost?") ;
+
+appData.expenses[requiredCostName] = requiredCostValue;
 
 
-// console.log(7/0);
-// let persone = {
-//     name: "Yevhen",
-//     age:39,
-//     isMarried: true
-// };
-// console.log(persone);
-// console.log(persone.name);
-// console.log("Is married? " + persone.isMarried);
-
-// let array = ['apple', 'huyakle', 'cucumber'];
-// console.log(array[0]);
-
-// // alert("Hello!");
-// let answer = confirm("Leave this page?");
-// // let answer = prompt("How are you?","Not bad");
-// console.log(typeof(false));
-
-// let incr = 10,
-//     decr = 10;
-
-// incr++;
-// decr--;
-// console.log(++incr);
-// console.log(--decr);
-// console.log("2" === 2);
-
-let isChecked = false,
-    isClose = true;
-
-console.log(!isChecked && isClose);
+console.log(appData.expenses[requiredCostName]);
