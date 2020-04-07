@@ -18,7 +18,7 @@ console.log(time);
 let requiredCostName= prompt("Enter a required cost item this month"),
     requiredCostValue= prompt("How much will it cost?") ;
 
-appData.expenses.requiredCostName = requiredCostValue;
-console.log(appData.expenses.requiredCostName);
+appData.expenses[requiredCostName] = requiredCostValue;
+console.log(appData.expenses[requiredCostName]);
 
 alert("Daily budget: "+ appData.budget/30);
