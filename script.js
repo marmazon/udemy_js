@@ -1,7 +1,8 @@
 'use strict';
 
-let money=prompt("What is your monthly budget?"),
-    time=prompt("Please, enter date in YYYY-MM-DD format.");
+let money, time;
+
+start();
 
 let appData = {
     budget: money,
@@ -9,57 +10,71 @@ let appData = {
     expenses: {},
     optionalExpenses: {},
     income: [],
-    savings: false
+    savings: true
 };
 
 
-// for(let i=1; i<=2; i++){
-    // let requiredCostName= prompt("Enter a required cost item this month"),
-    //     requiredCostValue= +prompt("How much will it cost?") ;
+chooseExpenses();
+detectDailyBudget();
+checkSavings();
+detectLevel();
 
-    // if(typeof(requiredCostName) != 'string' || requiredCostName.length > 50 || typeof(requiredCostValue) != 'number' 
-    // || requiredCostValue == '' || requiredCostName == ''){
-    //     alert('Error! More then 50 symbols or empty'); 
-    //     i--;
-    // } else {
-    //     appData.expenses[requiredCostName] = requiredCostValue;
-    // }
-    // i++;
 
+function start() {
+    money=prompt("What is your monthly budget?");
     
-// }
-
-// let i=1; 
-// while( i <= 2 ){
-//     let requiredCostName= prompt("Enter a required cost item this month"),
-//         requiredCostValue= +prompt("How much will it cost?") ;
-
-//     if(typeof(requiredCostName) != 'string' || requiredCostName.length > 50 || typeof(requiredCostValue) != 'number' 
-// || requiredCostValue == '' || requiredCostName == ''){
-//         alert('Error! More then 50 symbols or empty'); 
-//         i--;
-//     } else {
-//         appData.expenses[requiredCostName] = requiredCostValue;
-//     }
-//     i++;
-// }
-
-
-let i=1; 
-do{
-    let requiredCostName= prompt("Enter a required cost item this month"),
-        requiredCostValue= +prompt("How much will it cost?") ;
-
-    if(typeof(requiredCostName) != 'string' || requiredCostName.length > 50 || typeof(requiredCostValue) != 'number' ||
-     requiredCostValue == '' || requiredCostName == ''){
-        alert('Error! More then 50 symbols or empty'); 
-        i--;
-    } else {
-        appData.expenses[requiredCostName] = requiredCostValue;
+    while(isNaN(money) || money == null || money == ""){
+        money=prompt("What is your monthly budget?");
     }
-    i++;
+
+    time=prompt("Please, enter date in YYYY-MM-DD format.");
 }
-while( i <= 2 );
 
 
-alert("Daily budget: "+ appData.budget/30);
+
+
+
+function chooseExpenses() {
+    for(let i=1; i<=2; i++){
+        let requiredExpenseName= prompt("Enter a required expense this month"),
+            requiredExpenseValue= +prompt("How much will it?") ;
+
+        if( !isNaN(requiredExpenseName) || requiredExpenseName.length > 50 || isNaN(requiredExpenseValue) || 
+        requiredExpenseValue == '' || requiredExpenseName == ''){
+            alert('Error! More then 50 symbols or empty'); 
+            i--;
+        } else {
+            appData.expenses[requiredExpenseName] = requiredExpenseValue;
+        }
+
+    }
+}
+
+
+
+function checkSavings(){
+    if( appData.savings == true ){
+        let save = +prompt ("Enter savings amount:"),
+            percent = +prompt ("Enter interest rate (%):");
+        
+        appData.monthIncome = save*percent/100/12;
+        alert("Monthly income: " + appData.monthIncome.toFixed(2));
+    }
+}
+
+function detectDailyBudget(){
+    appData.moneyPerDay = (appData.budget/30).toFixed(2)
+    alert("Daily budget: "+ appData.moneyPerDay );
+}
+
+function detectLevel() {
+    if(appData.moneyPerDay < 100) {
+        console.log("Low wealth level")
+    } else if(appData.moneyPerDay >= 100 && appData.moneyPerDay <= 200)
+    {
+        console.log("Medium wealth level")
+    } else if(appData.moneyPerDay > 200){
+        console.log("High wealth level")
+    }
+
+}
