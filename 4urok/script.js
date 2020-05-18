@@ -62,7 +62,7 @@ let appData = {
         appData.income.sort();
             
         let message = "Ways to earn extra money: \n";
-        appData.income.forEach(function(arrElem, i, array){ message = message + " "+ (1+i) + " " + arrElem + "\n";
+        appData.income.forEach(function(arrElem, i){ message = message + " "+ (1+i) + " " + arrElem + "\n";
         });
         alert(message);
     }
@@ -84,6 +84,26 @@ function start() {
 }
 
 
+
+//разные методы перебора свойств объектов
+//let appData = {d:1, a:2};
+
 for(let i in appData){
     console.log(i +" "+ appData[i]);
 }
+
+let keys = Object.keys(appData);
+keys.forEach(i => 
+    console.log(i + ": " + appData[i])
+);
+
+let values = Object.values(appData);
+values.forEach(a => console.log(a));
+
+let arr = Object.entries(appData);
+arr.forEach(([i,a]) => {console.log(i + ": " + a);
+});
+
+let getResult = Object.getOwnPropertyNames(appData);
+getResult.forEach(i => {console.log(i + ": " + appData[i]);
+});
